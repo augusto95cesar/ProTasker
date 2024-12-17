@@ -44,7 +44,10 @@ namespace ProTasker.API.Services
         /// <param name="newProjeto"></param>
         /// <returns></returns>
         public void Delete(int projetoId)
-        { 
+        {
+            if (new TarefasService().ExisteTarefaPendenteParaOProjeto(projetoId))
+                throw new Exception("Existe tarefas com status pendente para o Projeto " + projetoId);
+
             this.projetoRepositorio.Delete(projetoId); 
         }
     }

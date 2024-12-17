@@ -62,5 +62,10 @@ namespace ProTasker.API.Services
         {
             this.tarefasRepositorio.Delete(tarefaId);
         }
+
+        internal bool ExisteTarefaPendenteParaOProjeto(int projetoId)
+        {
+            return this.tarefasRepositorio.ExisteTarefaPendenteParaOProjeto(projetoId);
+        }
     }
 }

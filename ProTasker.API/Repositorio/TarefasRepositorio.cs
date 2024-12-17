@@ -50,10 +50,10 @@ namespace ProTasker.API.Repositorio
                 dbConnection.Execute(insertQuery, new
                 {
                     Id = t.Id,
-                    Descricao = t.Descricao 
+                    Descricao = t.Descricao
                 });
             }
-        }   
+        }
 
         internal void PutTarefasStatus(Tarefa t)
         {
@@ -64,7 +64,7 @@ namespace ProTasker.API.Repositorio
 
                 dbConnection.Execute(insertQuery, new
                 {
-                    Id = t.Id, 
+                    Id = t.Id,
                     Status = t.Status
                 });
             }
@@ -81,6 +81,24 @@ namespace ProTasker.API.Repositorio
                 {
                     Id = tarefaId
                 });
+            }
+        }
+
+        internal bool ExisteTarefaPendenteParaOProjeto(int projetoId)
+        {
+            using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))
+            {
+                dbConnection.Open();
+
+                string insertQuery = @$"SELECT Count(*) FROM TAREFA WHERE IdProjeto = @Id AND Status = @Status ";
+
+                var existe = dbConnection.Query<int>(insertQuery, new
+                {
+                    Id = projetoId,
+                    Status = StatusTarefa.Pendente
+                }).FirstOrDefault();
+
+                return existe > 0 ? true : false;
             }
         }
     }
