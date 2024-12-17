@@ -29,7 +29,10 @@ namespace ProTasker.API.Data.ScriptBancoDados
                     IdProjeto INTEGER NOT NULL,
                     Nome TEXT NOT NULL,
                     Detalhes TEXT NOT NULL,
-                    PrioridadeTarefa INTEGER NOT NULL
+                    PrioridadeTarefa INTEGER NOT NULL,
+                    DataCriacao TEXT NOT NULL,
+                    DataFinalizacao TEXT,
+                    Status INTEGER NOT NULL
                 );";
 
         internal void Exec(string connectionString)
@@ -51,17 +54,17 @@ namespace ProTasker.API.Data.ScriptBancoDados
             }
         }
         private void CreateTarefas(IDbConnection dbConnection)
-        {  
+        {
             string createTableQuery = TBTarefas;
-            dbConnection.Execute(createTableQuery); 
+            dbConnection.Execute(createTableQuery);
         }
         private void CreateProjetos(IDbConnection dbConnection)
-        {  
+        {
             string createTableQuery = TBProjetos;
-            dbConnection.Execute(createTableQuery); 
+            dbConnection.Execute(createTableQuery);
         }
         private void CreateUsuarios(IDbConnection dbConnection)
-        { 
+        {
             var Login = "Master";
 
             string createTableQuery = TBUsuarios;

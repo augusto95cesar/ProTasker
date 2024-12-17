@@ -1,6 +1,6 @@
-﻿using ProTasker.API.DTOs.Projetos;
-using ProTasker.API.DTOs.Tarefas;
+﻿using ProTasker.API.DTOs.Tarefas;
 using ProTasker.API.Models.Entity;
+using ProTasker.API.Models.Enum;
 
 namespace ProTasker.API.Helpers.Maps
 {
@@ -22,6 +22,21 @@ namespace ProTasker.API.Helpers.Maps
             }
 
             return l;
+        }
+
+        public static Tarefa Map(this PostTarefaDTO t)
+        {
+            var tarefas = new Tarefa
+            {
+                Nome = t.NomeTarefa,
+                Detalhes = t.DescricaoTarefa,
+                IdProjeto = t.CodigoProjeto,
+                PrioridadeTarefa = (PrioridadeTarefa)t.CodigoPrioridade,
+                DataCriacao = DateTime.Now, 
+                Status = StatusTarefa.BackLog 
+            };
+
+            return tarefas;
         }
     }
 }
