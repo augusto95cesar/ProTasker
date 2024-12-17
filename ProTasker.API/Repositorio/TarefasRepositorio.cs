@@ -9,7 +9,7 @@ namespace ProTasker.API.Repositorio
 {
     public class TarefasRepositorio
     {
-        public List<Tarefa> GetAll (int projetoId)
+        public List<Tarefa> GetAll(int projetoId)
         {
             using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))
             {
@@ -28,8 +28,45 @@ namespace ProTasker.API.Repositorio
                 string insertQuery = @$"INSERT INTO TAREFA (IdProjeto,Titulo,Descricao,PrioridadeTarefa,DataCriacao, Status)  
                                      VALUES (@IdProjeto, @Titulo, @Descricao, @PrioridadeTarefa, @DataCriacao, @Status)";
 
-                dbConnection.Execute(insertQuery, new { IdProjeto = t.IdProjeto, Titulo = t.Titulo, Descricao = t.Descricao, 
-                    PrioridadeTarefa = t.PrioridadeTarefa, DataCriacao = t.DataCriacao.ToString("yyyy-MM-dd"), Status = t.Status });
+                dbConnection.Execute(insertQuery, new
+                {
+                    IdProjeto = t.IdProjeto,
+                    Titulo = t.Titulo,
+                    Descricao = t.Descricao,
+                    PrioridadeTarefa = t.PrioridadeTarefa,
+                    DataCriacao = t.DataCriacao.ToString("yyyy-MM-dd"),
+                    Status = t.Status
+                });
+            }
+        }
+
+        internal void PutTarefasDescricao(Tarefa t)
+        {
+            using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))
+            {
+                dbConnection.Open();
+                string insertQuery = @$"UPDATE TAREFA SET Descricao = @Descricao WHERE Id = @Id  ";
+
+                dbConnection.Execute(insertQuery, new
+                {
+                    Id = t.Id,
+                    Descricao = t.Descricao 
+                });
+            }
+        }
+
+        internal void PutTarefasStatus(Tarefa t)
+        {
+            using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))
+            {
+                dbConnection.Open();
+                string insertQuery = @$"UPDATE TAREFA SET   Status = @Status WHERE Id = @Id  ";
+
+                dbConnection.Execute(insertQuery, new
+                {
+                    Id = t.Id, 
+                    Status = t.Status
+                });
             }
         }
     }

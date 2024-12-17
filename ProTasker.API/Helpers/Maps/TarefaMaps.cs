@@ -38,5 +38,17 @@ namespace ProTasker.API.Helpers.Maps
 
             return tarefas;
         }
+
+        public static Tarefa Map(this PutTarefaDTO t)
+        {
+            var tarefas = new Tarefa
+            {
+                Id = t.CodigoTarefa, 
+                Descricao = t.Detalhes, 
+                Status = (StatusTarefa)t.Status
+            };
+
+            return tarefas;
+        }
     }
 }

@@ -33,5 +33,18 @@ namespace ProTasker.API.Services
             this.tarefasRepositorio.CreateTarefas(t);
             return tarefa;
         }
+
+        /// <summary>
+        /// Atualização de Tarefas - atualizar o status ou detalhes de uma tarefa
+        /// </summary>
+        /// <param name="tarefa"></param>
+        /// <returns></returns>
+        public PutTarefaDTO Put(PutTarefaDTO tarefa)
+        {
+            var t = tarefa.Map();
+            this.tarefasRepositorio.PutTarefasStatus(t);
+            this.tarefasRepositorio.PutTarefasDescricao(t);
+            return tarefa;
+        }
     }
 }

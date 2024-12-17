@@ -20,5 +20,8 @@ namespace ProTasker.API.Controllers
 
         [HttpPost]
         public IActionResult Post(PostTarefaDTO newTarefa) => Ok(tarefasService.Create(newTarefa));
+
+        [HttpPut]
+        public IActionResult Post(PutTarefaDTO putTarefa) => Ok(tarefasService.Put(putTarefa));
     }
 }
