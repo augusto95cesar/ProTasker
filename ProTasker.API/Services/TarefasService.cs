@@ -1,6 +1,8 @@
 ﻿using ProTasker.API.DTOs.Tarefas;
 using ProTasker.API.Helpers.Maps;
+using ProTasker.API.Models.Enum;
 using ProTasker.API.Repositorio;
+using System.Drawing;
 
 namespace ProTasker.API.Services
 {
@@ -29,6 +31,10 @@ namespace ProTasker.API.Services
         /// <returns></returns>
         public PostTarefaDTO Create(PostTarefaDTO tarefa)
         {
+            //Validação Enum Prioridade
+            if (!Enum.IsDefined(typeof(PrioridadeTarefa), tarefa.CodigoPrioridade))
+                throw new Exception("Selecione um Codigo de Prioridade Valido!");
+
             var t = tarefa.Map();
             this.tarefasRepositorio.CreateTarefas(t);
             return tarefa;
@@ -53,8 +59,8 @@ namespace ProTasker.API.Services
         /// <param name="tarefa"></param>
         /// <returns></returns>
         public void Delete(int tarefaId)
-        { 
-            this.tarefasRepositorio.Delete(tarefaId); 
+        {
+            this.tarefasRepositorio.Delete(tarefaId);
         }
     }
 }
