@@ -33,7 +33,7 @@ namespace ProTasker.API.Helpers.Maps
                 IdProjeto = t.CodigoProjeto,
                 PrioridadeTarefa = (PrioridadeTarefa)t.CodigoPrioridade,
                 DataCriacao = DateTime.Now, 
-                Status = StatusTarefa.BackLog 
+                Status = StatusTarefa.Pendente 
             };
 
             return tarefas;
