@@ -1,7 +1,6 @@
-﻿using ProTasker.API.DTOs;
-using ProTasker.API.DTOs.Projetos;
+﻿using ProTasker.API.DTOs.Projetos;
 using ProTasker.API.Helpers.Maps;
-using ProTasker.API.Repositorio; 
+using ProTasker.API.Repositorio;
 
 namespace ProTasker.API.Services
 {

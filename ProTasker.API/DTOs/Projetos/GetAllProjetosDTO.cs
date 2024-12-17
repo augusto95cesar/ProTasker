@@ -1,4 +1,4 @@
-﻿namespace ProTasker.API.DTOs
+﻿namespace ProTasker.API.DTOs.Projetos
 {
     public class GetAllProjetosDTO
     {

@@ -1,5 +1,4 @@
-﻿using ProTasker.API.DTOs;
-using ProTasker.API.DTOs.Projetos;
+﻿using ProTasker.API.DTOs.Projetos;
 using ProTasker.API.Models.Entity;
 
 namespace ProTasker.API.Helpers.Maps
