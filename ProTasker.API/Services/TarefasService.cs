@@ -12,11 +12,21 @@ namespace ProTasker.API.Services
         {
             this.tarefasRepositorio = new TarefasRepositorio();
         }
+        /// <summary>
+        /// Visualização de Tarefas - visualizar todas as tarefas de um projeto específico
+        /// </summary>
+        /// <param name="projetoId"></param>
+        /// <returns></returns>
         internal List<GetAllTarefasDTO> GetAll(int projetoId)
         {
             return this.tarefasRepositorio.GetAll(projetoId).Map();
         }
 
+        /// <summary>
+        /// Criação de Tarefas - adicionar uma nova tarefa a um projeto
+        /// </summary>
+        /// <param name="tarefa"></param>
+        /// <returns></returns>
         public PostTarefaDTO Create(PostTarefaDTO tarefa)
         {
             var t = tarefa.Map();

@@ -12,10 +12,22 @@ namespace ProTasker.API.Services
         {
             this.projetoRepositorio = new ProjetoRepositorio();
         }
+
+        /// <summary>
+        /// Listagem de Projetos - listar todos os projetos do usuário
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public List<GetAllProjetosDTO> GetAll(int userId)
         {
           return this.projetoRepositorio.GetProjestos(userId).Map();
         }
+
+        /// <summary>
+        /// Criação de Projetos - criar um novo projeto
+        /// </summary>
+        /// <param name="newProjeto"></param>
+        /// <returns></returns>
         public PostProjetoDTO Create(PostProjetoDTO newProjeto)
         {
             //Verificar se Usuario Existe
