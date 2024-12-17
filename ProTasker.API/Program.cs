@@ -8,12 +8,21 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-// Executar um código na inicialização
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider; 
-    new CreateDataBaseScript().Exec(connectionString);
+    try
+    {
+        var services = scope.ServiceProvider;
+        var configuration = services.GetRequiredService<IConfiguration>();
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        var createDbScript = services.GetRequiredService<CreateDataBaseScript>();
+        createDbScript.Exec(connectionString);
+    }
+    catch (Exception ex)
+    { 
+        throw ex;
+    }
 }
 
 // Configure the HTTP request pipeline.
