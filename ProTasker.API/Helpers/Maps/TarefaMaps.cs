@@ -15,8 +15,8 @@ namespace ProTasker.API.Helpers.Maps
                 l.Add(new GetAllTarefasDTO
                 {
                     Code = t.Id,
-                    NomeTarefa = t.Nome,
-                    Descricao = t.Detalhes,
+                    NomeTarefa = t.Titulo,
+                    Descricao = t.Descricao,
                     Prioridade = t.PrioridadeTarefa.ToString()
                 });
             }
@@ -28,8 +28,8 @@ namespace ProTasker.API.Helpers.Maps
         {
             var tarefas = new Tarefa
             {
-                Nome = t.NomeTarefa,
-                Detalhes = t.DescricaoTarefa,
+                Titulo = t.NomeTarefa,
+                Descricao = t.DescricaoTarefa,
                 IdProjeto = t.CodigoProjeto,
                 PrioridadeTarefa = (PrioridadeTarefa)t.CodigoPrioridade,
                 DataCriacao = DateTime.Now, 

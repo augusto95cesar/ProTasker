@@ -27,12 +27,12 @@ namespace ProTasker.API.Data.ScriptBancoDados
                 CREATE TABLE IF NOT EXISTS TAREFA (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     IdProjeto INTEGER NOT NULL,
-                    Nome TEXT NOT NULL,
-                    Detalhes TEXT NOT NULL,
-                    PrioridadeTarefa INTEGER NOT NULL,
+                    Titulo TEXT NOT NULL,
+                    Descricao TEXT NOT NULL,
                     DataCriacao TEXT NOT NULL,
-                    DataFinalizacao TEXT,
-                    Status INTEGER NOT NULL
+                    DataVencimento TEXT,
+                    Status INTEGER NOT NULL,
+                    PrioridadeTarefa INTEGER NOT NULL
                 );";
 
         internal void Exec(string connectionString)

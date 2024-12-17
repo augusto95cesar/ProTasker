@@ -2,9 +2,8 @@
 {
     public enum StatusTarefa
     {
-        BackLog,
-        Ativo,
-        Pausado,
-        Finalizado
+        Pendente,
+        Andamento,
+        Concluida
     }
 }

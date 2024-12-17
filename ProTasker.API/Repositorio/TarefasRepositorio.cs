@@ -25,10 +25,11 @@ namespace ProTasker.API.Repositorio
             using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))
             {
                 dbConnection.Open();
-                string insertQuery = @$"INSERT INTO TAREFA (IdProjeto,Nome,Detalhes,PrioridadeTarefa,DataCriacao, Status)  
-                                     VALUES (@IdProjeto, @Nome, @Detalhes, @PrioridadeTarefa, @DataCriacao, @Status)";
+                string insertQuery = @$"INSERT INTO TAREFA (IdProjeto,Titulo,Descricao,PrioridadeTarefa,DataCriacao, Status)  
+                                     VALUES (@IdProjeto, @Titulo, @Descricao, @PrioridadeTarefa, @DataCriacao, @Status)";
 
-                dbConnection.Execute(insertQuery, new { IdProjeto = t.IdProjeto, Nome = t.Nome, Detalhes = t.Detalhes, PrioridadeTarefa = t.PrioridadeTarefa, DataCriacao = t.DataCriacao.ToString("yyyy-MM-dd"), Status = t.Status });
+                dbConnection.Execute(insertQuery, new { IdProjeto = t.IdProjeto, Titulo = t.Titulo, Descricao = t.Descricao, 
+                    PrioridadeTarefa = t.PrioridadeTarefa, DataCriacao = t.DataCriacao.ToString("yyyy-MM-dd"), Status = t.Status });
             }
         }
     }
