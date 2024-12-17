@@ -1,11 +1,12 @@
 ﻿using ProTasker.API.DTOs;
+using ProTasker.API.DTOs.Projetos;
 using ProTasker.API.Models.Entity;
 
 namespace ProTasker.API.Helpers.Maps
 {
     public static class ProjetoMaps
     {
-       public static List<GetAllProjetosDTO> Map(this List<Projeto> projetos)
+        public static List<GetAllProjetosDTO> Map(this List<Projeto> projetos)
         {
             var l = new List<GetAllProjetosDTO>();
 
@@ -15,11 +16,22 @@ namespace ProTasker.API.Helpers.Maps
                 {
                     Code = p.Id,
                     Nome = p.Nome,
-                    Status =  p.StatusProjeto.ToString()
+                    Status = p.StatusProjeto.ToString()
                 });
             }
 
             return l;
+        }
+
+        public static Projeto CreateMap(this PostProjetoDTO p)
+        {
+            return new Projeto
+            {
+                IdUser = p.UsuarioId,
+                Nome = p.NomeProjeto,
+                DataCriacao = DateTime.Now,
+                StatusProjeto = Models.Enum.StatusProjeto.Ativo
+            };
         }
     }
 }
