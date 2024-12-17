@@ -37,5 +37,15 @@ namespace ProTasker.API.Services
             this.projetoRepositorio.CreateProjetos(projeto);
             return newProjeto;
         }
+
+        /// <summary>
+        /// Remove Projeto
+        /// </summary>
+        /// <param name="newProjeto"></param>
+        /// <returns></returns>
+        public void Delete(int projetoId)
+        { 
+            this.projetoRepositorio.Delete(projetoId); 
+        }
     }
 }

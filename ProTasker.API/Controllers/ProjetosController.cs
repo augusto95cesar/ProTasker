@@ -20,5 +20,13 @@ namespace ProTasker.API.Controllers
 
         [HttpPost]
         public IActionResult Post(PostProjetoDTO newProjeto) => Ok(projetoService.Create(newProjeto));
+
+
+        [HttpDelete("{projetoId}")]
+        public IActionResult Delete(int projetoId)
+        {
+            projetoService.Delete(projetoId);
+            return Ok("Projeto removido com sucesso!");
+        }
     } 
 }

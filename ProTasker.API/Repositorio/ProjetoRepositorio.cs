@@ -29,5 +29,14 @@ namespace ProTasker.API.Repositorio
                 dbConnection.Execute(insertQuery, new { IdUser = p.IdUser, Nome = p.Nome, DataCriacao = p.DataCriacao.ToString("yyyy-MM-dd"), StatusProjeto = (int)p.StatusProjeto });
             }
         }
+        internal void Delete(int projetoId)
+        {
+            using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))
+            {
+                dbConnection.Open();
+                string insertQuery = @"DELETE FROM PROJETO WHERE ID = @Id"; 
+                dbConnection.Execute(insertQuery, new { Id = projetoId});
+            }
+        }
     }
 }
