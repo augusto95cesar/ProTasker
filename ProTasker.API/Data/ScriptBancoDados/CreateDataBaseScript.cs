@@ -14,6 +14,24 @@ namespace ProTasker.API.Data.ScriptBancoDados
                     TipoUsuario INTEGER NOT NULL
                 );";
 
+        string TBProjetos = $@"
+                CREATE TABLE IF NOT EXISTS PROJETO (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    IdUser INTEGER NOT NULL,
+                    Nome TEXT NOT NULL,
+                    DataCriacao TEXT NOT NULL,
+                    StatusProjeto INTEGER NOT NULL
+                );";
+
+        string TBTarefas = $@"
+                CREATE TABLE IF NOT EXISTS TAREFA (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    IdProjeto INTEGER NOT NULL,
+                    Nome TEXT NOT NULL,
+                    Detalhes TEXT NOT NULL,
+                    PrioridadeTarefa INTEGER NOT NULL
+                );";
+
         internal void Exec(string connectionString)
         {
             try
@@ -23,6 +41,8 @@ namespace ProTasker.API.Data.ScriptBancoDados
                     dbConnection.Open();
 
                     CreateUsuarios(dbConnection);
+                    CreateProjetos(dbConnection);
+                    CreateTarefas(dbConnection);
                 }
             }
             catch (Exception ex)
@@ -30,7 +50,16 @@ namespace ProTasker.API.Data.ScriptBancoDados
                 throw ex;
             }
         }
-
+        private void CreateTarefas(IDbConnection dbConnection)
+        {  
+            string createTableQuery = TBTarefas;
+            dbConnection.Execute(createTableQuery); 
+        }
+        private void CreateProjetos(IDbConnection dbConnection)
+        {  
+            string createTableQuery = TBProjetos;
+            dbConnection.Execute(createTableQuery); 
+        }
         private void CreateUsuarios(IDbConnection dbConnection)
         { 
             var Login = "Master";
