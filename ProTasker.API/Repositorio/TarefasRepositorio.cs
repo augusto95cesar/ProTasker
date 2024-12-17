@@ -53,7 +53,7 @@ namespace ProTasker.API.Repositorio
                     Descricao = t.Descricao 
                 });
             }
-        }
+        }   
 
         internal void PutTarefasStatus(Tarefa t)
         {
@@ -66,6 +66,20 @@ namespace ProTasker.API.Repositorio
                 {
                     Id = t.Id, 
                     Status = t.Status
+                });
+            }
+        }
+
+        internal void Delete(int tarefaId)
+        {
+            using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))
+            {
+                dbConnection.Open();
+                string insertQuery = @$"DELETE FROM TAREFA WHERE Id = @Id  ";
+
+                dbConnection.Execute(insertQuery, new
+                {
+                    Id = tarefaId
                 });
             }
         }

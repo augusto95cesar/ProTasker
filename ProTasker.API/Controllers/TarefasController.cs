@@ -23,5 +23,12 @@ namespace ProTasker.API.Controllers
 
         [HttpPut]
         public IActionResult Post(PutTarefaDTO putTarefa) => Ok(tarefasService.Put(putTarefa));
+
+        [HttpDelete("{tarefaId}")]
+        public IActionResult Delete(int tarefaId)
+        {
+            tarefasService.Delete(tarefaId);
+            return Ok("Tarefa removida com sucesso!");
+        }
     }
 }

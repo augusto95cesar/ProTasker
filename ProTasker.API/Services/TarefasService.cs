@@ -46,5 +46,15 @@ namespace ProTasker.API.Services
             this.tarefasRepositorio.PutTarefasDescricao(t);
             return tarefa;
         }
+
+        /// <summary>
+        /// Remoção de Tarefas - remover uma tarefa de um projeto
+        /// </summary>
+        /// <param name="tarefa"></param>
+        /// <returns></returns>
+        public void Delete(int tarefaId)
+        { 
+            this.tarefasRepositorio.Delete(tarefaId); 
+        }
     }
 }
