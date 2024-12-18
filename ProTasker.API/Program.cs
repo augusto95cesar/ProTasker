@@ -1,5 +1,11 @@
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using ProTasker.API.Data.ScriptBancoDados;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using ProTasker.API.Helpers.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +29,73 @@ builder.Services.AddSwaggerGen(c =>
             Url = new Uri("https://github.com/augusto95cesar")
         }
     });
+
+    // Configuração do esquema de segurança
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Insira o token JWT no formato: Bearer {seu_token}"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+
+    // Filtro para autenticação por classe
+    c.OperationFilter<AuthOperationFilter>();
+
 });
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"])),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine($"Token inválido: {context.Exception.Message}");
+                return Task.CompletedTask;
+            },
+            OnTokenValidated = context =>
+            {
+                Console.WriteLine($"Token válido: {context.SecurityToken}");
+                return Task.CompletedTask;
+            },
+            OnChallenge = context =>
+            {
+                Console.WriteLine($"Falha de autenticação: {context.ErrorDescription}");
+                return Task.CompletedTask;
+            }
+        };
+    });
+
+
+
 
 var app = builder.Build();
 
@@ -59,7 +131,8 @@ app.UseSwaggerUI(c =>
 app.UseHttpsRedirection();
 // Configure the HTTP request pipeline.
 
-app.UseAuthorization();
+app.UseAuthentication(); // Middleware para autenticação
+app.UseAuthorization();  // Middleware para autorização 
 
 app.MapControllers();
 

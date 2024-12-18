@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc; 
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc; 
 using ProTasker.API.DTOs.Tarefas;
 using ProTasker.API.Services;
 
 namespace ProTasker.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class TarefasController : ControllerBase

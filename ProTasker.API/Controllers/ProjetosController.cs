@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProTasker.API.DTOs.Projetos;
 using ProTasker.API.Services;
 
 namespace ProTasker.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ProjetosController : ControllerBase
@@ -16,7 +18,13 @@ namespace ProTasker.API.Controllers
         }
 
         [HttpGet("{userId}")]
-        public IActionResult Get(int userId) =>   Ok(projetoService.GetAll(userId)); 
+        public IActionResult Get(int userId)
+        {
+            var userName = User.Identity.Name;
+            var idUsuario = User.FindFirst("idUsuario")?.Value;
+
+            return Ok(projetoService.GetAll(userId));
+        }
 
         [HttpPost]
         public IActionResult Post(PostProjetoDTO newProjeto) => Ok(projetoService.Create(newProjeto));
@@ -28,5 +36,5 @@ namespace ProTasker.API.Controllers
             projetoService.Delete(projetoId);
             return Ok("Projeto removido com sucesso!");
         }
-    } 
+    }
 }
