@@ -19,10 +19,7 @@ namespace ProTasker.API.Controllers
 
         [HttpGet("{userId}")]
         public IActionResult Get(int userId)
-        {
-            var userName = User.Identity.Name;
-            var idUsuario = User.FindFirst("idUsuario")?.Value;
-
+        { 
             return Ok(projetoService.GetAll(userId));
         }
 

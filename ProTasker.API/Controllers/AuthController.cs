@@ -24,7 +24,7 @@ namespace ProTasker.API.Controllers
         {
             // Validação das credenciais (simulação
             var idUsuario = 1;
-            request.Username = "master"; 
+            request.Username = "master";
             request.Password = "123456";
 
             //if (request.Username != "master" || request.Password != "123456")
@@ -58,7 +58,7 @@ namespace ProTasker.API.Controllers
             );
 
             var tokenWrite = new JwtSecurityTokenHandler().WriteToken(token);
-            return Ok(new { token = "Bearer " + tokenWrite });
+            return Ok("Bearer " + tokenWrite);
         }
     }
 

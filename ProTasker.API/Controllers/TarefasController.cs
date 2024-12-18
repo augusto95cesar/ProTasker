@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Mvc;
 using ProTasker.API.DTOs.Tarefas;
 using ProTasker.API.Services;
 
@@ -24,7 +24,8 @@ namespace ProTasker.API.Controllers
         public IActionResult Post(PostTarefaDTO newTarefa) => Ok(tarefasService.Create(newTarefa));
 
         [HttpPut]
-        public IActionResult Post(PutTarefaDTO putTarefa) => Ok(tarefasService.Put(putTarefa));
+        public IActionResult Pùt(PutTarefaDTO putTarefa) => Ok(tarefasService.Put(putTarefa, int.Parse(User.FindFirst("idUsuario")?.Value)));
+
 
         [HttpDelete("{tarefaId}")]
         public IActionResult Delete(int tarefaId)
