@@ -12,5 +12,6 @@ namespace ProTasker.API.Models.Entity
         public DateTime? DataVencimento { get;  set; }
         public StatusTarefa Status { get;  set; }
         public PrioridadeTarefa PrioridadeTarefa { get; set; }
+        public string Comentarios { get; set; }
     }
 }

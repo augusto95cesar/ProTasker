@@ -83,5 +83,26 @@ namespace ProTasker.API.Services
         {
             return this.tarefasRepositorio.ExisteTarefaPendenteParaOProjeto(projetoId);
         }
+
+        /// <summary>
+        /// Atualização de Tarefas - atualizar o status ou detalhes de uma tarefa
+        /// </summary>
+        /// <param name="tarefa"></param>
+        /// <returns></returns>
+        public PutComentarioDTO Put(PutComentarioDTO t, int idUsuario)
+        { 
+            this.tarefasRepositorio.AddComentario(t.Comentario, t.CodigoTarefa); 
+
+            var th = this.tarefasRepositorio.Get(t.CodigoTarefa);
+
+            if (th != null)
+            {
+                var historico = th.Map();
+                historico.CodigoUsuario = idUsuario;
+                new HistoricoTarefaRepositorio().GravarHistoricoTarefa(historico);
+            }
+
+            return t;
+        }
     }
 }

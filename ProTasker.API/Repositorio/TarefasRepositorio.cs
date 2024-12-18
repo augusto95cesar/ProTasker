@@ -123,5 +123,20 @@ namespace ProTasker.API.Repositorio
                 return existe > 0 ? true : false;
             }
         }
+
+        internal void AddComentario(string comentario, int id)
+        {
+            using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))
+            {
+                dbConnection.Open();
+                string insertQuery = @$"UPDATE TAREFA SET Comentarios = @Comentarios WHERE Id = @Id ";
+
+                dbConnection.Execute(insertQuery, new
+                {
+                    Id = id,
+                    Comentarios = comentario
+                });
+            }
+        }
     }
 }

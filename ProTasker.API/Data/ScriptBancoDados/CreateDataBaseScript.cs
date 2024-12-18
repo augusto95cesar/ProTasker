@@ -32,7 +32,8 @@ namespace ProTasker.API.Data.ScriptBancoDados
                     DataCriacao TEXT NOT NULL,
                     DataVencimento TEXT,
                     Status INTEGER NOT NULL,
-                    PrioridadeTarefa INTEGER NOT NULL
+                    PrioridadeTarefa INTEGER NOT NULL,
+                    Comentarios TEXT 
                 );";
         
         string TBHistoricoTarefas = $@"
@@ -47,7 +48,8 @@ namespace ProTasker.API.Data.ScriptBancoDados
                     DataCriacao TEXT NOT NULL,
                     DataVencimento TEXT,
                     Status INTEGER NOT NULL,
-                    PrioridadeTarefa INTEGER NOT NULL
+                    PrioridadeTarefa INTEGER NOT NULL,
+                    Comentarios TEXT 
                 );";
 
         internal void Exec(string connectionString)

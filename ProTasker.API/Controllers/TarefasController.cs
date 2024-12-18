@@ -24,7 +24,10 @@ namespace ProTasker.API.Controllers
         public IActionResult Post(PostTarefaDTO newTarefa) => Ok(tarefasService.Create(newTarefa));
 
         [HttpPut]
-        public IActionResult Pùt(PutTarefaDTO putTarefa) => Ok(tarefasService.Put(putTarefa, int.Parse(User.FindFirst("idUsuario")?.Value)));
+        public IActionResult Put(PutTarefaDTO putTarefa) => Ok(tarefasService.Put(putTarefa, int.Parse(User.FindFirst("idUsuario")?.Value)));
+        
+        [HttpPut("Copentario")]
+        public IActionResult Put(PutComentarioDTO putTarefa) => Ok(tarefasService.Put(putTarefa, int.Parse(User.FindFirst("idUsuario")?.Value)));
 
 
         [HttpDelete("{tarefaId}")]

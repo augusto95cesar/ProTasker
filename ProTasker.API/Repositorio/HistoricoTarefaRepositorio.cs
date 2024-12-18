@@ -14,17 +14,9 @@ namespace ProTasker.API.Repositorio
             {
                 dbConnection.Open();
                 string insertQuery = @$"INSERT INTO HISTORICO_TAREFA
-                                        (DataHistorico, CodigoUsuario, IdProjeto, IdTarefa, Titulo, Descricao, DataCriacao, DataVencimento, Status, PrioridadeTarefa)
-                                        VALUES(@DataHistorico, @CodigoUsuario, @IdProjeto, @IdTarefa, @Titulo, @Descricao, @DataCriacao, @DataVencimento, @Status, @PrioridadeTarefa);";
-
-                try
-                {
-                    dbConnection.Execute(insertQuery, historico);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                                        (DataHistorico, CodigoUsuario, IdProjeto, IdTarefa, Titulo, Descricao, DataCriacao, DataVencimento, Status, PrioridadeTarefa, Comentarios)
+                                        VALUES(@DataHistorico, @CodigoUsuario, @IdProjeto, @IdTarefa, @Titulo, @Descricao, @DataCriacao, @DataVencimento, @Status, @PrioridadeTarefa, @Comentarios);";
+                dbConnection.Execute(insertQuery, historico);
             }
         }
     }
