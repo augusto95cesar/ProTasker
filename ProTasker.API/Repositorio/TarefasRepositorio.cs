@@ -31,6 +31,17 @@ namespace ProTasker.API.Repositorio
             }
         }
 
+        internal int QtdTarefasDoProjeto(int idProjeto)
+        {
+            using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))
+            {
+                dbConnection.Open();
+                string checkTableQuery = @"SELECT Count(*) FROM TAREFA WHERE IdProjeto = @Id";
+
+                return dbConnection.Query<int>(checkTableQuery, new { Id = idProjeto }).FirstOrDefault();
+            }
+        }
+
         internal void CreateTarefas(Tarefa t)
         {
             using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))

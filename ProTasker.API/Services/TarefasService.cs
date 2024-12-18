@@ -1,5 +1,6 @@
 ﻿using ProTasker.API.DTOs.Tarefas;
 using ProTasker.API.Helpers.Maps;
+using ProTasker.API.Models.Entity;
 using ProTasker.API.Models.Enum;
 using ProTasker.API.Repositorio;
 using System.Drawing;
@@ -35,6 +36,10 @@ namespace ProTasker.API.Services
             if (!Enum.IsDefined(typeof(PrioridadeTarefa), tarefa.CodigoPrioridade))
                 throw new Exception("Selecione um Codigo de Prioridade Valido!");
 
+            //Validar limite de tarefas criadas menor que 20
+            if (this.tarefasRepositorio.QtdTarefasDoProjeto(tarefa.CodigoProjeto) >= 20)
+                throw new Exception("limite máximo de 20 tarefas");
+
             var t = tarefa.Map();
             this.tarefasRepositorio.CreateTarefas(t);
             return tarefa;
@@ -52,9 +57,14 @@ namespace ProTasker.API.Services
             this.tarefasRepositorio.PutTarefasStatus(t);
             this.tarefasRepositorio.PutTarefasDescricao(t);
 
-            var historico = this.tarefasRepositorio.Get(t.Id).Map();
-            historico.CodigoUsuario = idUsuario;
-            new HistoricoTarefaRepositorio().GravarHistoricoTarefa(historico);
+            var th = this.tarefasRepositorio.Get(t.Id);
+
+            if (th != null)
+            {
+                var historico = th.Map();
+                historico.CodigoUsuario = idUsuario;
+                new HistoricoTarefaRepositorio().GravarHistoricoTarefa(historico);
+            }
 
             return tarefa;
         }

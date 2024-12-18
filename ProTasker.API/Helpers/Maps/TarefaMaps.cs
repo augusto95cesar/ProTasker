@@ -52,9 +52,7 @@ namespace ProTasker.API.Helpers.Maps
         }
 
         public static HistoricoTarefa Map(this Tarefa tarefas)
-        {
-            if (tarefas == null) return new HistoricoTarefa();
-
+        { 
             HistoricoTarefa h = (HistoricoTarefa)tarefas;
             h.IdTarefa = h.Id;
             h.Id = 0;
