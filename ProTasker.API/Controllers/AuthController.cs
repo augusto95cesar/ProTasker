@@ -21,9 +21,11 @@ namespace ProTasker.API.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginModel request)
+        public IActionResult Login()
+        //public IActionResult Login([FromBody] LoginModel request)
         {
             // Validação das credenciais (simulação
+            LoginModel request = new LoginModel();
             var idUsuario = 1;
             var typePerfil = (int)TipoUsuario.Admin;
             request.Username = "master";

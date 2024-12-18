@@ -62,7 +62,8 @@ namespace ProTasker.API.Helpers.Maps
                 Titulo = t.Titulo,
                 PrioridadeTarefa = t.PrioridadeTarefa,
                 Status = t.Status,
-                DataVencimento = t.DataVencimento 
+                DataVencimento = t.DataVencimento,
+                DataHistorico = DateTime.Now
             };
 
             return h;

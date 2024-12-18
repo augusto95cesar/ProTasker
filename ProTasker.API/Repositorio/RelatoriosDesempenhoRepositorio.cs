@@ -10,9 +10,10 @@ namespace ProTasker.API.Repositorio
     {
         internal List<Desempenho> GetRdlDesempenho()
         {
-            var checkTableQuery = $@"FROM PROJETO INNER JOIN TAREFA T ON PROJETO.Id = T.IdProjeto 
-                         WHERE T.Status = 3
-                         GROUP BY PROJETO.IdUser";
+            var checkTableQuery = $@"SELECT PROJETO.IdUser AS User , COUNT(T.Id) As QtdTaskConclida 
+                                        FROM PROJETO INNER JOIN TAREFA T ON PROJETO.Id = T.IdProjeto 
+                                        WHERE T.Status = 3
+                                        GROUP BY PROJETO.IdUser ";
 
             using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))
             {
