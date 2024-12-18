@@ -2,8 +2,8 @@
 {
     public enum StatusTarefa
     {
-        Pendente,
-        Andamento,
-        Concluida
+        Pendente = 1,
+        Andamento = 2,
+        Concluida = 3
     }
 }

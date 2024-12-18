@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using ProTasker.API.Models.Enum;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -24,6 +25,7 @@ namespace ProTasker.API.Controllers
         {
             // Validação das credenciais (simulação
             var idUsuario = 1;
+            var typePerfil = (int)TipoUsuario.Admin;
             request.Username = "master";
             request.Password = "123456";
 
@@ -45,7 +47,7 @@ namespace ProTasker.API.Controllers
             {
               new Claim("idUsuario", $"{idUsuario}"),
               new Claim(ClaimTypes.Name, request.Username),
-              new Claim(ClaimTypes.Role, "Admin"),
+              new Claim(ClaimTypes.Role, typePerfil.ToString()),
               new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

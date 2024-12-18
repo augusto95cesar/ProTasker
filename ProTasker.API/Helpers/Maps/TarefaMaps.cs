@@ -51,13 +51,19 @@ namespace ProTasker.API.Helpers.Maps
             return tarefas;
         }
 
-        public static HistoricoTarefa Map(this Tarefa tarefas)
-        { 
-            HistoricoTarefa h = (HistoricoTarefa)tarefas;
-            h.IdTarefa = h.Id;
-            h.Id = 0;
-            h.DataHistorico = DateTime.Now;
-            h.CodigoUsuario = 0;
+        public static HistoricoTarefa Map(this Tarefa t)
+        {
+            HistoricoTarefa h = new HistoricoTarefa
+            {
+                IdTarefa = t.Id,
+                IdProjeto = t.IdProjeto,
+                DataCriacao = t.DataCriacao,
+                Descricao = t.Descricao,
+                Titulo = t.Titulo,
+                PrioridadeTarefa = t.PrioridadeTarefa,
+                Status = t.Status,
+                DataVencimento = t.DataVencimento 
+            };
 
             return h;
         }

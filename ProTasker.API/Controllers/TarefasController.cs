@@ -5,7 +5,7 @@ using ProTasker.API.Services;
 
 namespace ProTasker.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class TarefasController : ControllerBase
