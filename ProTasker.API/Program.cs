@@ -38,22 +38,23 @@ using (var scope = app.Services.CreateScope())
         new CreateDataBaseScript().Exec(connectionString);
     }
     catch (Exception ex)
-    { 
+    {
         throw ex;
     }
 }
 
+
 // Configuração do pipeline de requisições HTTP.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
+//{
+// Habilitar o Swagger apenas em ambiente de desenvolvimento
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    // Habilitar o Swagger apenas em ambiente de desenvolvimento
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API ProTasker");
-        c.RoutePrefix = string.Empty; // Para acessar diretamente no root
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API ProTasker");
+    c.RoutePrefix = string.Empty; // Para acessar diretamente no root
+});
+//}
 
 app.UseHttpsRedirection();
 // Configure the HTTP request pipeline.

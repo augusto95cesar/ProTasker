@@ -34,6 +34,21 @@ namespace ProTasker.API.Data.ScriptBancoDados
                     Status INTEGER NOT NULL,
                     PrioridadeTarefa INTEGER NOT NULL
                 );";
+        
+        string TBHistoricoTarefas = $@"
+                CREATE TABLE IF NOT EXISTS HISTORICO_TAREFA (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    DataHistorico TEXT NOT NULL,
+                    CodigoUsuario INTEGER NOT NULL,
+                    IdProjeto INTEGER NOT NULL,
+                    IdTarefa INTEGER NOT NULL,
+                    Titulo TEXT NOT NULL,
+                    Descricao TEXT NOT NULL,
+                    DataCriacao TEXT NOT NULL,
+                    DataVencimento TEXT,
+                    Status INTEGER NOT NULL,
+                    PrioridadeTarefa INTEGER NOT NULL
+                );";
 
         internal void Exec(string connectionString)
         {
@@ -46,12 +61,18 @@ namespace ProTasker.API.Data.ScriptBancoDados
                     CreateUsuarios(dbConnection);
                     CreateProjetos(dbConnection);
                     CreateTarefas(dbConnection);
+                    CreateHistoricoTarefas(dbConnection);
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+        private void CreateHistoricoTarefas(IDbConnection dbConnection)
+        {
+            string createTableQuery = TBHistoricoTarefas;
+            dbConnection.Execute(createTableQuery);
         }
         private void CreateTarefas(IDbConnection dbConnection)
         {

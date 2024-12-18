@@ -48,8 +48,12 @@ namespace ProTasker.API.Services
         public PutTarefaDTO Put(PutTarefaDTO tarefa)
         {
             var t = tarefa.Map();
+
             this.tarefasRepositorio.PutTarefasStatus(t);
             this.tarefasRepositorio.PutTarefasDescricao(t);
+
+            new HistoricoTarefaRepositorio().GravarHistoricoTarefa(this.tarefasRepositorio.Get(t.Id).Map());
+
             return tarefa;
         }
 

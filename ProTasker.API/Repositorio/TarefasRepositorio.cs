@@ -20,6 +20,17 @@ namespace ProTasker.API.Repositorio
             }
         }
 
+        public Tarefa Get(int id)
+        {
+            using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))
+            {
+                dbConnection.Open();
+                string checkTableQuery = @"SELECT * FROM TAREFA WHERE Id = @Id";
+
+                return dbConnection.Query<Tarefa>(checkTableQuery, new { Id = id }).FirstOrDefault();
+            }
+        }
+
         internal void CreateTarefas(Tarefa t)
         {
             using (IDbConnection dbConnection = new SqliteConnection(DataContext.GetDefaultConnectionString()))

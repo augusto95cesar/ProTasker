@@ -32,8 +32,8 @@ namespace ProTasker.API.Helpers.Maps
                 Descricao = t.DescricaoTarefa,
                 IdProjeto = t.CodigoProjeto,
                 PrioridadeTarefa = (PrioridadeTarefa)t.CodigoPrioridade,
-                DataCriacao = DateTime.Now, 
-                Status = StatusTarefa.Pendente 
+                DataCriacao = DateTime.Now,
+                Status = StatusTarefa.Pendente
             };
 
             return tarefas;
@@ -43,12 +43,23 @@ namespace ProTasker.API.Helpers.Maps
         {
             var tarefas = new Tarefa
             {
-                Id = t.CodigoTarefa, 
-                Descricao = t.Detalhes, 
+                Id = t.CodigoTarefa,
+                Descricao = t.Detalhes,
                 Status = (StatusTarefa)t.Status
             };
 
             return tarefas;
+        }
+
+        public static HistoricoTarefa Map(this Tarefa tarefas)
+        {
+            HistoricoTarefa h = (HistoricoTarefa)tarefas;
+            h.IdTarefa = h.Id;
+            h.Id = 0;
+            h.DataHistorico = DateTime.Now;
+            h.CodigoUsuario = 0;
+
+            return h;
         }
     }
 }
