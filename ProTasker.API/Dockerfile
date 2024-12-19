@@ -8,11 +8,11 @@ COPY ProTasker.API.csproj ./
 # Restaura as dependências
 RUN dotnet restore "ProTasker.API.csproj"
 
-# Listar arquivos para verificação
+# Verifique o conteúdo do diretório
 RUN ls -al /src
 
-# Construa o projeto com verificação de falha
-RUN dotnet build "ProTasker.API.csproj" -c Release -o /app/build || (echo "Build failed"; exit 1)
+# Construa o projeto com verificação de falha e saída detalhada
+RUN dotnet build "ProTasker.API.csproj" -c Release -o /app/build && echo "Build succeeded" || (echo "Build failed"; exit 1)
 
 # Etapa de publicação
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
