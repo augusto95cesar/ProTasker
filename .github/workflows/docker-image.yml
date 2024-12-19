@@ -8,11 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  # Ambiente onde o job será executado
-    run:
-        sudo apt-get update
-        sudo apt-get install docker.io
-        sudo service docker start
-
     steps:
     # 1. Verifica o repositório
     - name: Checkout repository
