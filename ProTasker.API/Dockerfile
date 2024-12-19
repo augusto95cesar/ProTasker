@@ -24,4 +24,4 @@ EXPOSE 80
 EXPOSE 443
 
 # Configurar o ponto de entrada para executar a aplicação
-ENTRYPOINT ["dotnet", "NomeDaSuaAPI.dll"]
+ENTRYPOINT ["dotnet", "ProTasker.API.dll"]
