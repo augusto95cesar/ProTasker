@@ -2,17 +2,17 @@
 
 WORKDIR /src
 
-# Corrigir o caminho de cópia para o .csproj
+# Copiar o .csproj
 COPY ProTasker.API.csproj ./
 
 # Restaura as dependências
 RUN dotnet restore "ProTasker.API.csproj"
 
-# Copia o restante dos arquivos
-COPY . .
+# Listar arquivos para verificação
+RUN ls -al /src
 
-# Construa o projeto
-RUN dotnet build "ProTasker.API.csproj" -c Release -o /app/build
+# Construa o projeto com verificação de falha
+RUN dotnet build "ProTasker.API.csproj" -c Release -o /app/build || (echo "Build failed"; exit 1)
 
 # Etapa de publicação
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
