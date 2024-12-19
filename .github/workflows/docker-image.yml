@@ -29,7 +29,8 @@ jobs:
     # 4. Realiza o build da imagem Docker
     - name: Build Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/protasker:${{ github.sha }} .
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/protasker .
+        ##docker build -t ${{ secrets.DOCKER_USERNAME }}/protasker:${{ github.sha }} .
 
     # 5. Realiza o login no Docker Hub
     - name: Log in to Docker Hub
