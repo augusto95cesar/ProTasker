@@ -7,8 +7,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["ProTasker.API.csproj", "ProTasker.API/"]
-RUN dotnet restore "ProTasker.API.csproj"
+COPY ["./ProTasker.API.csproj", "ProTasker.API/"]
+RUN dotnet restore "./ProTasker.API.csproj"
 COPY . .
 WORKDIR "/src/ProTasker.API"
 RUN dotnet build "ProTasker.API.csproj" -c Release -o /app/build
