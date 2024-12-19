@@ -30,7 +30,7 @@ jobs:
     - name: Build Docker image
       run: |
         docker build -t ${{ secrets.DOCKER_USERNAME }}/protasker .
-        ##docker build -t ${{ secrets.DOCKER_USERNAME }}/protasker:${{ github.sha }} .
+    ##docker build -t ${{ secrets.DOCKER_USERNAME }}/protasker:${{ github.sha }} .
 
     # 5. Realiza o login no Docker Hub
     - name: Log in to Docker Hub
@@ -42,4 +42,5 @@ jobs:
     # 6. Envia a imagem para o Docker Hub
     - name: Push Docker image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/protasker:${{ github.sha }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/protasker
+    ##docker push ${{ secrets.DOCKER_USERNAME }}/protasker:${{ github.sha }}
