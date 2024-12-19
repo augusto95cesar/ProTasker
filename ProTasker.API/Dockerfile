@@ -1,27 +1,22 @@
-﻿# Etapa 1: Imagem base para compilar a aplicação
-FROM mcr.microsoft.com / dotnet / sdk:6.0 AS build
+﻿#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-
-# Copiar arquivos do projeto e restaurar dependências
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copiar todo o código para o contêiner
-COPY . ./
-
-# Compilar o projeto
-RUN dotnet publish -c Release -o /publish
-
-# Etapa 2: Imagem base para rodar a aplicação
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
-WORKDIR /app
-
-# Copiar os arquivos compilados para o contêiner
-COPY --from=build /publish .
-
-# Expor a porta onde a API estará escutando
 EXPOSE 80
 EXPOSE 443
 
-# Configurar o ponto de entrada para executar a aplicação
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["ProTasker.API/ProTasker.API.csproj", "ProTasker.API/"]
+RUN dotnet restore "ProTasker.API/ProTasker.API.csproj"
+COPY . .
+WORKDIR "/src/ProTasker.API"
+RUN dotnet build "ProTasker.API.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "ProTasker.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "ProTasker.API.dll"]

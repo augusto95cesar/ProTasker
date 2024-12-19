@@ -41,4 +41,4 @@ jobs:
     # 6. Envia a imagem para o Docker Hub
     - name: Push Docker image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/protasker:${{ github.sha }}
