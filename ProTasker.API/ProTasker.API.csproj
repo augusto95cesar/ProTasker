@@ -8,12 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Dockerfile.txt" />
     <None Remove="ProTaskerDB.db" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Dockerfile.txt" />
   </ItemGroup>
 
   <ItemGroup>
